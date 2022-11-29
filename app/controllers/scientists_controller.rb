@@ -10,7 +10,7 @@ class ScientistsController < ApplicationController
 
     def show
         scientist = Scientist.find( params[:id] )
-        render json: scientist, except: [:created_at, :updated_at], include: :planets, status: :ok
+        render json: scientist.to_json( except: [:created_at, :updated_at], include: [:planets => { except: [:created_at, :updated_at] } ]), status: :ok
     end
 
     def create
